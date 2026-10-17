@@ -42,7 +42,7 @@
     }
 
     /* =========================================
-       BACKGROUND CANVAS SIMULATING COUPLE VIDEO
+       BACKGROUND CANVAS / VIDEO
     ========================================= */
     .bg-video-container {
       position: fixed;
@@ -61,7 +61,6 @@
       display: block;
     }
 
-    /* Vignette & Color Grading Overlay */
     .bg-overlay {
       position: fixed;
       inset: 0;
@@ -71,7 +70,6 @@
       pointer-events: none;
     }
 
-    /* Floating Golden Sparkles */
     .sparkle-particles {
       position: fixed;
       inset: 0;
@@ -140,7 +138,6 @@
       transform: translateY(-8px) scale(1.02);
     }
 
-    /* 3D Envelope Flap */
     .envelope-flap {
       position: absolute;
       top: 0;
@@ -198,7 +195,6 @@
       margin-top: 5px;
     }
 
-    /* Wax Seal */
     .wax-seal-btn {
       position: absolute;
       top: 85px;
@@ -253,7 +249,6 @@
       50% { transform: translateY(-5px); opacity: 1; }
     }
 
-    /* Top Shloka Bar */
     .top-shloka {
       text-align: center;
       font-family: 'Cinzel', serif;
@@ -274,7 +269,6 @@
       white-space: nowrap;
     }
 
-    /* Glass Cards */
     .glass-card {
       background: var(--glass-bg);
       backdrop-filter: blur(14px);
@@ -342,7 +336,6 @@
       line-height: 1.7;
     }
 
-    /* Names */
     .names-section {
       margin: 28px 0;
     }
@@ -421,7 +414,6 @@
       margin-top: 4px;
     }
 
-    /* Countdown */
     .countdown-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -453,7 +445,6 @@
       margin-top: 6px;
     }
 
-    /* Program Schedule */
     .section-headline {
       font-family: 'Cinzel', serif;
       font-size: 1.6rem;
@@ -511,7 +502,6 @@
       font-weight: 600;
     }
 
-    /* Venue */
     .venue-title {
       font-family: 'Cinzel', serif;
       font-size: 1.65rem;
@@ -569,7 +559,6 @@
       text-shadow: 0 0 15px rgba(224, 179, 84, 0.4);
     }
 
-    /* Music Floating Button */
     .music-floating-btn {
       position: fixed;
       bottom: 25px;
@@ -648,11 +637,9 @@
 
   <!-- BACKGROUND VIDEO/ANIMATION CONTAINER -->
   <div class="bg-video-container">
-    <!-- Real video tag for production hosting -->
     <video id="bgVideo" autoplay muted loop playsinline preload="auto" style="display:none; width:100%; height:100%; object-fit:cover;">
       <source src="couple-video.mp4" type="video/mp4" />
     </video>
-    <!-- Dynamic Canvas background fallback to guarantee an animated preview right in this frame -->
     <canvas id="bgCanvas"></canvas>
   </div>
   <div class="bg-overlay"></div>
@@ -661,7 +648,7 @@
   <!-- AUSPICIOUS MANTRAS -->
   <div class="container" style="padding-bottom: 0;">
     <div class="top-shloka">
-      ॥ Sri Kaati Kotieswara Swamy Prasannam ॥[cite: 1]
+      ॥ Sri Kaati Kotieswara Swamy Prasannam ॥
     </div>
   </div>
 
@@ -679,8 +666,8 @@
       <div class="envelope-flap"></div>
       
       <div class="envelope-preview-card">
-        <h3>Udayeshwar & Vinitha</h3>[cite: 1]
-        <p>RECEPTION INVITATION</p>[cite: 1]
+        <h3>Udayeshwar & Vinitha</h3>
+        <p>RECEPTION INVITATION</p>
       </div>
 
       <div class="wax-seal-btn" id="waxSeal">
@@ -703,10 +690,10 @@
     <section class="glass-card">
       <div class="ornamental-frame"></div>
 
-      <div class="invitation-title">Voleti Family's Reception Invitation</div>[cite: 1]
+      <div class="invitation-title">Voleti Family's Reception Invitation</div>
       
-      <div class="hosts-title">Smt. Voleti Supriya & Sri. Voleti Sivananda</div>[cite: 1]
-      <div class="hosts-address">Udayraj Gifts, Sivanagar, Dharmavaram - 515671</div>[cite: 1]
+      <div class="hosts-title">Smt. Voleti Supriya & Sri. Voleti Sivananda</div>
+      <div class="hosts-address">Udayraj Gifts, Sivanagar, Dharmavaram - 515671</div>
 
       <p class="invitation-body-text">
         Together with their Families and with great joy & delight, we warmly invite you to celebrate the joyous wedding reception of
@@ -714,26 +701,26 @@
 
       <!-- COUPLE NAMES -->
       <div class="names-section">
-        <div class="groom-name">Udayeshwar</div>[cite: 1]
+        <div class="groom-name">Udayeshwar</div>
         <div class="knot-icon-wrap">
           <span class="knot-line"></span>
           <i class="fa-solid fa-dharmachakra"></i>
           <span class="knot-line"></span>
         </div>
-        <div class="bride-name">Vinitha</div>[cite: 1]
+        <div class="bride-name">Vinitha</div>
       </div>
 
       <div class="bride-parents-info">
-        D/o <strong>Smt. M. Rajani & Sri. M. Madhusudhan</strong>[cite: 1]
+        D/o <strong>Smt. M. Rajani & Sri. M. Madhusudhan</strong>
       </div>
-      <div class="bride-town">Tandur, Vikarabad Dist.</div>[cite: 1]
+      <div class="bride-town">Tandur, Vikarabad Dist.</div>
 
       <div>
-        <span class="badge-reception">RECEPTION</span>[cite: 1]
+        <span class="badge-reception">RECEPTION</span>
       </div>
       <div class="reception-datetime">
-        Sunday, 29th November 2026[cite: 1]
-        <span>11:00 AM Onwards</span>[cite: 1]
+        Sunday, 29th November 2026
+        <span>11:00 AM Onwards</span>
       </div>
 
       <!-- COUNTDOWN TIMER -->
@@ -769,7 +756,7 @@
           </div>
           <div class="schedule-text">
             <h4>Welcome & Reception</h4>
-            <span>11:00 AM Onwards</span>[cite: 1]
+            <span>11:00 AM Onwards</span>
           </div>
         </div>
 
@@ -790,9 +777,9 @@
       <div class="ornamental-frame"></div>
       
       <h3 class="section-headline">Venue Location</h3>
-      <div class="venue-title">Pola Convention Hall</div>[cite: 1]
+      <div class="venue-title">Pola Convention Hall</div>
       <p class="venue-address-text">
-        Bathalapalli Road, Dharmavaram, Andhra Pradesh - 515671[cite: 1]
+        Bathalapalli Road, Dharmavaram, Andhra Pradesh - 515671
       </p>
 
       <a href="https://www.google.com/maps/search/?api=1&query=Pola+Convention+Hall+Bathalapalli+Road+Dharmavaram" target="_blank" rel="noopener noreferrer" class="maps-btn">
@@ -801,22 +788,22 @@
 
       <div>
         <div class="invitee-pill">
-          Special Invitee: <strong>Rajesh Voleti</strong>[cite: 1]
+          Special Invitee: <strong>Rajesh Voleti</strong>
         </div>
       </div>
 
       <div class="footer-regards">
-        With best compliments from : Near & Dear[cite: 1]
+        With best compliments from : Near & Dear
       </div>
     </section>
 
   </main>
 
   <!-- =========================================
-       SCRIPTS: VIDEO FALLBACK, AUDIO & LOGIC
+       SCRIPTS
   ========================================= -->
   <script>
-    // 1. Interactive Canvas Background (simulates dynamic couple dance scene with warm ambiance & bokeh)
+    // 1. Ambient Canvas
     const canvas = document.getElementById('bgCanvas');
     const ctx = canvas.getContext('2d');
     let width, height;
@@ -828,21 +815,19 @@
     window.addEventListener('resize', resizeCanvas);
     resizeCanvas();
 
-    // Bokeh light spheres
     const orbs = Array.from({ length: 18 }, () => ({
       x: Math.random() * window.innerWidth,
       y: Math.random() * window.innerHeight,
       radius: Math.random() * 90 + 40,
       vx: (Math.random() - 0.5) * 0.4,
       vy: (Math.random() - 0.5) * 0.4,
-      hue: Math.random() > 0.5 ? 42 : 340, // Gold or crimson
+      hue: Math.random() > 0.5 ? 42 : 340,
       alpha: Math.random() * 0.25 + 0.1
     }));
 
     function drawAmbiance() {
       ctx.clearRect(0, 0, width, height);
 
-      // Warm background base
       const grad = ctx.createLinearGradient(0, 0, width, height);
       grad.addColorStop(0, '#2d0312');
       grad.addColorStop(0.5, '#4a0820');
@@ -850,7 +835,6 @@
       ctx.fillStyle = grad;
       ctx.fillRect(0, 0, width, height);
 
-      // Render floating bokeh lights
       orbs.forEach(orb => {
         orb.x += orb.vx;
         orb.y += orb.vy;
@@ -873,7 +857,6 @@
     }
     drawAmbiance();
 
-    // Check if real local video exists, if so display it
     const bgVideo = document.getElementById('bgVideo');
     if (bgVideo) {
       bgVideo.addEventListener('canplay', () => {
@@ -946,7 +929,7 @@
       }, 950);
     });
 
-    // 4. Reception Countdown (29th Nov 2026, 11:00 AM IST)
+    // 4. Reception Countdown
     const weddingDate = new Date("2026-11-29T11:00:00+05:30").getTime();
 
     function updateTimer() {
