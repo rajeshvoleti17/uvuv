@@ -4,582 +4,854 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Reception Invitation | Udayeshwar & Vinitha</title>
-  
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Great Vibes, Cinzel & Cormorant Garamond -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Great+Vibes&display=swap" rel="stylesheet">
-  
-  <!-- FontAwesome for icons -->
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Great+Vibes&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            royal: {
-              gold: '#D4AF37',
-              darkgold: '#996515',
-              maroon: '#800020',
-              cream: '#FFFDF9',
-              rose: '#D81B60',
-              deeprose: '#AD1457',
-              sand: '#F7F3E9'
-            }
-          },
-          fontFamily: {
-            cursive: ['"Great Vibes"', 'cursive'],
-            serifTitle: ['"Cinzel"', 'serif'],
-            bodyFont: ['"Cormorant Garamond"', 'serif']
-          }
-        }
-      }
-    }
-  </script>
-
   <style>
-    /* Smooth floral float animations */
-    @keyframes petalFloat {
-      0% { transform: translateY(-10%) rotate(0deg); opacity: 0; }
-      20% { opacity: 0.8; }
-      100% { transform: translateY(110vh) rotate(360deg); opacity: 0; }
+    :root {
+      --primary: #9e1b4c;
+      --primary-dark: #6e0c31;
+      --primary-light: #fbebf1;
+      --gold: #d4af37;
+      --gold-dark: #aa820a;
+      --gold-light: #fff5db;
+      --cream: #fdfbf7;
+      --dark: #2c1b22;
+      --gray: #66585e;
+      --card-bg: rgba(255, 255, 255, 0.94);
+      --shadow: 0 16px 40px rgba(158, 27, 76, 0.08);
+      --border-glow: 1px solid rgba(212, 175, 55, 0.35);
     }
 
-    .petal {
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Plus Jakarta Sans', sans-serif;
+      background: #faf6f0;
+      color: var(--dark);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Traditional Indian Mandala Background Pattern */
+    .bg-pattern {
       position: fixed;
-      top: -10px;
+      inset: 0;
+      background-image: 
+        radial-gradient(circle at 10% 20%, rgba(212, 175, 55, 0.05) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(158, 27, 76, 0.05) 0%, transparent 40%),
+        radial-gradient(#d4af37 0.6px, transparent 0.6px);
+      background-size: 100% 100%, 100% 100%, 26px 26px;
+      z-index: -1;
+    }
+
+    /* Top Auspicious Bar */
+    .blessing-bar {
+      text-align: center;
+      padding: 14px 15px;
+      font-family: 'Cinzel', serif;
+      font-size: 0.88rem;
+      letter-spacing: 2px;
+      color: var(--gold-dark);
+      background: linear-gradient(90deg, #fff9ec, #ffffff, #fff9ec);
+      border-bottom: var(--border-glow);
+      font-weight: 600;
+    }
+
+    /* Container */
+    .container {
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* Music Player Floating Button */
+    .music-ctrl-btn {
+      position: fixed;
+      bottom: 24px;
+      right: 24px;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: var(--gold-light);
+      border: 2px solid var(--gold);
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+      cursor: pointer;
+      z-index: 1000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .music-ctrl-btn:hover {
+      transform: scale(1.1);
+    }
+    .music-ctrl-btn.playing {
+      animation: pulseGlow 2s infinite;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { box-shadow: 0 0 10px rgba(212, 175, 55, 0.4); }
+      50% { box-shadow: 0 0 22px rgba(212, 175, 55, 0.85); }
+    }
+
+    /* Hidden YouTube Iframe Player */
+    #yt-audio-player {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      left: -9999px;
+      top: -9999px;
+      opacity: 0;
       pointer-events: none;
-      z-index: 40;
-      animation: petalFloat linear infinite;
     }
 
-    /* Envelope Opening 3D Transform */
-    .perspective-1000 {
-      perspective: 1000px;
+    /* =========================================
+       ENVELOPE OPENING EXPERIENCE
+    ========================================= */
+    #invitation-envelope-overlay {
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(circle at center, #2e111d, #14070c);
+      z-index: 9999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: opacity 1s cubic-bezier(0.77, 0, 0.175, 1), visibility 1s;
+      padding: 20px;
+    }
+    #invitation-envelope-overlay.opened {
+      opacity: 0;
+      visibility: hidden;
+      pointer-events: none;
     }
 
-    .flap-fold {
-      transform-origin: top;
-      transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    .envelope-wrapper {
+      position: relative;
+      width: 320px;
+      height: 220px;
+      background: #731336;
+      border-radius: 8px;
+      box-shadow: 0 25px 60px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      border: 2px solid var(--gold);
+      transform-style: preserve-3d;
+      transition: transform 0.4s ease;
+    }
+    .envelope-wrapper:hover {
+      transform: translateY(-5px);
     }
 
-    .envelope-open .flap-fold {
-      transform: rotateX(180deg);
-      z-index: 0;
+    .envelope-gold-trim {
+      position: absolute;
+      inset: 8px;
+      border: 1px dashed rgba(212, 175, 55, 0.6);
+      border-radius: 4px;
+      pointer-events: none;
     }
 
-    .gold-foil-text {
-      background: linear-gradient(135deg, #bf953f, #fcf6ba, #b38728, #fbf5b7, #aa771c);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
+    .wax-seal {
+      width: 78px;
+      height: 78px;
+      background: radial-gradient(circle at 35% 35%, #e6be44, #b08412, #6b4e02);
+      border-radius: 50%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.5), inset 0 2px 4px rgba(255,255,255,0.4);
+      border: 2px solid #5a4000;
+      cursor: pointer;
+      animation: sealBob 2.5s ease-in-out infinite;
+      z-index: 10;
+    }
+    @keyframes sealBob {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.06); }
+    }
+    .wax-seal i {
+      font-size: 1.4rem;
+      color: #3b2800;
+      margin-bottom: 2px;
+    }
+    .wax-seal span {
+      font-size: 0.62rem;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: #3b2800;
+      letter-spacing: 1px;
     }
 
-    .gold-border {
-      border-image: linear-gradient(to right, #bf953f, #fcf6ba, #b38728) 1;
+    .envelope-instruction {
+      margin-top: 30px;
+      color: #f7e6c4;
+      font-family: 'Cinzel', serif;
+      letter-spacing: 2px;
+      font-size: 0.95rem;
+      text-align: center;
+      animation: fadeInOut 2s infinite;
+    }
+    @keyframes fadeInOut {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
     }
 
-    /* Modal Image Lightbox */
-    .lightbox-active {
-      display: flex !important;
+    /* =========================================
+       HERO CARD SECTION
+    ========================================= */
+    .hero-section {
+      padding: 40px 0 25px;
+    }
+
+    .main-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 50px 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: var(--border-glow);
+      position: relative;
+    }
+
+    .card-border-ornament {
+      position: absolute;
+      inset: 12px;
+      border: 1px solid rgba(212, 175, 55, 0.45);
+      border-radius: 14px;
+      pointer-events: none;
+    }
+
+    .sub-head {
+      font-family: 'Cinzel', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-transform: uppercase;
+      letter-spacing: 2.5px;
+      margin-bottom: 12px;
+    }
+
+    .hosts-info {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 6px;
+    }
+
+    .hosts-address {
+      font-size: 0.92rem;
+      color: var(--gray);
+      margin-bottom: 26px;
+    }
+
+    .invitation-quote {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 1.15rem;
+      color: var(--dark);
+      max-width: 620px;
+      margin: 0 auto 30px;
+      line-height: 1.7;
+    }
+
+    /* Couple Names */
+    .couple-container {
+      margin: 30px 0;
+    }
+
+    .groom-name, .bride-name {
+      font-family: 'Great Vibes', cursive;
+      font-size: 4.2rem;
+      line-height: 1.1;
+      color: var(--primary);
+      text-shadow: 1px 1px 0px rgba(212, 175, 55, 0.3);
+    }
+
+    .couple-divider {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 15px;
+      margin: 14px 0;
+    }
+
+    .divider-line {
+      width: 65px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+    }
+
+    .couple-divider i {
+      color: var(--gold);
+      font-size: 1.1rem;
+    }
+
+    .bride-parents {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin-top: 10px;
+    }
+    .bride-parents strong {
+      color: var(--primary);
+    }
+    .bride-city {
+      font-size: 0.9rem;
+      color: var(--gray);
+      margin-top: 4px;
+    }
+
+    /* Event Badge */
+    .event-badge {
+      display: inline-block;
+      margin: 32px 0 16px;
+      padding: 7px 24px;
+      background: var(--primary-light);
+      border: 1px solid rgba(158, 27, 76, 0.25);
+      border-radius: 30px;
+      font-family: 'Cinzel', serif;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: var(--primary);
+      font-size: 1.05rem;
+    }
+
+    .event-main-time {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.35rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 25px;
+    }
+
+    /* =========================================
+       COUPLE VIDEO SECTION (Replaces Gallery)
+    ========================================= */
+    .video-section {
+      padding: 30px 0;
+    }
+
+    .section-title {
+      font-family: 'Cinzel', serif;
+      font-size: 1.7rem;
+      color: var(--primary);
+      text-align: center;
+      margin-bottom: 8px;
+      letter-spacing: 1.5px;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      color: var(--gray);
+      margin-bottom: 28px;
+      font-size: 1.05rem;
+    }
+
+    .video-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+      border: var(--border-glow);
+      position: relative;
+      padding: 16px;
+    }
+
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      border-radius: 14px;
+      overflow: hidden;
+      background: #000;
+      max-height: 580px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+    }
+
+    .video-wrapper video {
+      width: 100%;
+      max-height: 560px;
+      object-fit: contain;
+      display: block;
+      background: #0d0608;
+    }
+
+    .video-caption {
+      text-align: center;
+      padding: 18px 10px 8px;
+    }
+    .video-caption h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.25rem;
+      color: var(--primary);
+      margin-bottom: 4px;
+    }
+    .video-caption p {
+      font-size: 0.9rem;
+      color: var(--gray);
+    }
+
+    /* =========================================
+       COUNTDOWN TIMER
+    ========================================= */
+    .countdown-section {
+      padding: 25px 0;
+    }
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      max-width: 580px;
+      margin: 0 auto;
+    }
+    .timer-box {
+      background: #ffffff;
+      border: var(--border-glow);
+      border-radius: 14px;
+      padding: 16px 8px;
+      text-align: center;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.03);
+    }
+    .timer-box .num {
+      font-family: 'Cinzel', serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1;
+    }
+    .timer-box .label {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: var(--gray);
+      margin-top: 6px;
+    }
+
+    /* =========================================
+       PROGRAM SCHEDULE (With Lunch at 1:00 PM)
+    ========================================= */
+    .schedule-section {
+      padding: 30px 0;
+    }
+    .timeline {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      background: #ffffff;
+      padding: 18px 24px;
+      border-radius: 14px;
+      border-left: 5px solid var(--primary);
+      box-shadow: 0 4px 14px rgba(0,0,0,0.04);
+      border-top: var(--border-glow);
+      border-right: var(--border-glow);
+      border-bottom: var(--border-glow);
+    }
+    .timeline-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--primary-light);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+      flex-shrink: 0;
+    }
+    .timeline-info h4 {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      color: var(--dark);
+      margin-bottom: 2px;
+    }
+    .timeline-info span {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--primary);
+    }
+
+    /* =========================================
+       VENUE & SPECIAL INVITEE
+    ========================================= */
+    .venue-section {
+      padding: 30px 0 50px;
+    }
+    .venue-card {
+      background: var(--card-bg);
+      border-radius: 20px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: var(--shadow);
+      border: var(--border-glow);
+    }
+    .venue-name {
+      font-family: 'Cinzel', serif;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+    }
+    .venue-address {
+      font-size: 1.05rem;
+      color: var(--gray);
+      margin-bottom: 22px;
+    }
+
+    .btn-directions {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 30px;
+      background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+      color: #ffffff;
+      text-decoration: none;
+      border-radius: 30px;
+      font-weight: 600;
+      font-size: 0.95rem;
+      box-shadow: 0 6px 18px rgba(158, 27, 76, 0.28);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .btn-directions:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(158, 27, 76, 0.38);
+      color: #fff;
+    }
+
+    /* Special Invitee Pill */
+    .special-invitee-badge {
+      display: inline-block;
+      margin-top: 36px;
+      padding: 10px 28px;
+      border-radius: 50px;
+      border: 1.5px solid var(--primary);
+      background: #fff;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      color: var(--dark);
+    }
+    .special-invitee-badge strong {
+      color: var(--primary);
+    }
+
+    .footer-warmth {
+      margin-top: 35px;
+      font-family: 'Great Vibes', cursive;
+      font-size: 2.2rem;
+      color: var(--primary);
+    }
+
+    /* Mobile Adaptations */
+    @media (max-width: 600px) {
+      .groom-name, .bride-name {
+        font-size: 3.2rem;
+      }
+      .main-card {
+        padding: 35px 18px;
+      }
+      .timer-grid {
+        gap: 8px;
+      }
+      .timer-box {
+        padding: 12px 4px;
+      }
+      .timer-box .num {
+        font-size: 1.5rem;
+      }
     }
   </style>
 </head>
-<body class="bg-[#FAF7F2] text-stone-800 font-bodyFont antialiased selection:bg-pink-100 selection:text-pink-900 overflow-x-hidden">
+<body>
 
-  <!-- Ambient Floating Petals -->
-  <div id="petal-container" aria-hidden="true"></div>
+  <div class="bg-pattern"></div>
 
-  <!-- Audio Player Floating Toggle Button -->
-  <div class="fixed bottom-6 right-6 z-50">
-    <button id="musicToggleBtn" class="flex items-center gap-2 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white px-4 py-3 rounded-full shadow-2xl transition transform hover:scale-105 active:scale-95 border-2 border-amber-200" title="Toggle Shehnai / Music">
-      <i id="musicIcon" class="fas fa-music animate-bounce"></i>
-      <span id="musicText" class="text-xs font-serifTitle tracking-widest uppercase">Music: Off</span>
-    </button>
+  <!-- AUSPICIOUS INVOCATION -->
+  <div class="blessing-bar">
+    ॥ SRI KAATI KOTIESWARA SWAMY PRASANNAM ॥
   </div>
 
-  <!-- ============================================== -->
-  <!-- 1. ROYAL ENVELOPE OPENING OVERLAY SCREEN      -->
-  <!-- ============================================== -->
-  <div id="openingScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-stone-900 bg-opacity-95 p-4 transition-opacity duration-1000 backdrop-blur-md">
-    <div class="max-w-md w-full text-center">
-      <div class="relative bg-gradient-to-b from-[#FFFDF8] to-[#F5ECE0] rounded-2xl shadow-2xl border-4 border-amber-400/60 p-8 pt-10 text-stone-800 transform transition-all duration-700 scale-100" id="letterBox">
-        
-        <!-- Traditional Invocation -->
-        <p class="text-xs sm:text-sm font-serifTitle tracking-widest text-amber-700 font-bold uppercase mb-2">
-          ॥ శ్రీ కాటి కోటీశ్వర స్వామి ప్రసన్నం ॥
-        </p>
-        <p class="text-xs font-serifTitle tracking-widest text-stone-500 uppercase mb-4">
-          Sri Kaati Kotieswara Swamy Prasannam
-        </p>
+  <!-- FLOATING MUSIC CONTROL (Shatamanam Bhavati) -->
+  <button id="musicToggleBtn" class="music-ctrl-btn" title="Toggle Music">
+    <i class="fa-solid fa-music"></i>
+  </button>
 
-        <!-- Floral Graphic Divider -->
-        <div class="flex items-center justify-center gap-3 my-2 text-amber-600">
-          <div class="h-px w-12 bg-amber-400"></div>
-          <i class="fas fa-feather-pointed text-lg"></i>
-          <div class="h-px w-12 bg-amber-400"></div>
-        </div>
+  <!-- HIDDEN YOUTUBE PLAYER CONTAINER -->
+  <div id="yt-audio-player"></div>
 
-        <h3 class="text-xl sm:text-2xl font-serifTitle text-rose-800 font-semibold mt-3">
-          Voleti Family's
-        </h3>
-        <p class="text-3xl sm:text-4xl font-cursive text-amber-700 font-bold mb-4">
-          Reception Invitation
-        </p>
-
-        <p class="text-sm sm:text-base text-stone-600 font-bodyFont italic px-4">
-          Together with their Families and with great joy & excitement, you are cordially invited to celebrate the union of
-        </p>
-
-        <div class="my-5">
-          <h2 class="text-3xl sm:text-4xl font-cursive text-rose-600 font-bold leading-tight">
-            Udayeshwar
-          </h2>
-          <div class="flex justify-center items-center my-1">
-            <span class="text-xl text-amber-600 font-serifTitle">&</span>
-          </div>
-          <h2 class="text-3xl sm:text-4xl font-cursive text-rose-600 font-bold leading-tight">
-            Vinitha
-          </h2>
-        </div>
-
-        <p class="text-xs uppercase tracking-widest font-serifTitle text-stone-500 mb-6">
-          Sunday, 29th November 2026 • Dharmavaram
-        </p>
-
-        <!-- Wax Seal "Open Invitation" Button -->
-        <div class="flex flex-col items-center">
-          <button id="openInvitationBtn" class="group relative flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-tr from-red-800 via-rose-700 to-amber-600 shadow-xl border-4 border-amber-300 transform transition duration-300 hover:scale-110 active:scale-95 focus:outline-none">
-            <span class="absolute text-[10px] text-amber-100 font-serifTitle tracking-widest uppercase font-bold text-center leading-none">
-              Tap To<br/><span class="text-amber-300 text-xs font-black">OPEN</span>
-            </span>
-          </button>
-          <span class="text-xs text-amber-700 font-serifTitle mt-2 tracking-wider animate-pulse">Touch to unseal</span>
-        </div>
-
+  <!-- ====================================================
+       INTERACTIVE ENVELOPE OPENING
+  ==================================================== -->
+  <div id="invitation-envelope-overlay">
+    <div class="envelope-wrapper" id="openEnvelopeBtn">
+      <div class="envelope-gold-trim"></div>
+      <div class="wax-seal">
+        <i class="fa-solid fa-heart"></i>
+        <span>OPEN</span>
       </div>
+    </div>
+    <div class="envelope-instruction">
+      <i class="fa-solid fa-envelope-open-text" style="margin-right: 8px;"></i> Tap the seal to open invitation
     </div>
   </div>
 
+  <!-- ====================================================
+       MAIN INVITATION CARD
+  ==================================================== -->
+  <main class="container">
+    <section class="hero-section">
+      <div class="main-card">
+        <div class="card-border-ornament"></div>
 
-  <!-- ============================================== -->
-  <!-- 2. MAIN INVITATION WEBPAGE (REVEALED ON TAP)   -->
-  <!-- ============================================== -->
-  <main id="mainWebsite" class="relative min-h-screen pb-16 opacity-0 transition-opacity duration-1000">
-
-    <!-- Header / Hero Section -->
-    <header class="relative pt-12 pb-20 px-4 text-center bg-gradient-to-b from-[#FFF7ED] via-[#FDFBF7] to-transparent">
-      
-      <!-- Top Auspicious Inscription -->
-      <div class="max-w-2xl mx-auto mb-6">
-        <p class="text-sm sm:text-base font-serifTitle font-bold tracking-widest text-amber-800 uppercase">
-          ॥ శ్రీ కాటి కోటీశ్వర స్వామి ప్రసన్నం ॥
-        </p>
-        <p class="text-xs sm:text-sm font-serifTitle tracking-widest text-stone-600 uppercase">
-          Sri Kaati Kotieswara Swamy Prasannam
-        </p>
-        <div class="flex items-center justify-center gap-3 my-3">
-          <span class="h-0.5 w-16 bg-gradient-to-r from-transparent to-amber-500"></span>
-          <i class="fas fa-om text-amber-700 text-xl"></i>
-          <span class="h-0.5 w-16 bg-gradient-to-l from-transparent to-amber-500"></span>
-        </div>
-      </div>
-
-      <!-- Main Invitation Header Banner -->
-      <div class="max-w-3xl mx-auto bg-white/80 backdrop-blur-sm rounded-3xl p-6 sm:p-10 shadow-xl border border-amber-200/80">
-        <h4 class="text-2xl sm:text-3xl font-cursive text-amber-700 font-semibold mb-1">
-          Voleti Family's
-        </h4>
-        <h1 class="text-3xl sm:text-5xl font-serifTitle font-bold text-rose-700 tracking-wide uppercase mb-4">
-          Reception Invitation
-        </h1>
-
-        <!-- Host Parents Information (Voleti Family) -->
-        <div class="bg-amber-50/70 rounded-2xl p-4 border border-amber-200/60 my-4 max-w-xl mx-auto">
-          <p class="text-lg sm:text-xl font-serifTitle font-bold text-stone-800">
-            Smt. Voleti Supriya <span class="text-rose-600 font-normal">&</span> Sri. Voleti Sivananda
-          </p>
-          <p class="text-sm sm:text-base font-serifTitle text-stone-600 mt-1">
-            <i class="fas fa-store text-amber-600 mr-1"></i> Udayraj Gifts, Sivanagar, Dharmavaram - 515671
-          </p>
-        </div>
-
-        <p class="text-base sm:text-lg italic font-bodyFont text-stone-700 my-4 px-2">
-          Together with their Families and with great joy & delight, we invite you to celebrate the Reception of
-        </p>
-
-        <!-- Couple Names Section -->
-        <div class="py-6 px-4 my-2 border-y-2 border-amber-200/70">
-          <div class="text-4xl sm:text-6xl font-cursive font-bold text-rose-600 drop-shadow-sm">
-            Udayeshwar
-          </div>
-
-          <!-- Traditional Hastamelap / Hands SVG Silhouette -->
-          <div class="my-4 flex justify-center items-center gap-3 text-amber-600">
-            <span class="w-12 h-px bg-amber-400"></span>
-            <div class="p-3 bg-amber-100/60 rounded-full border border-amber-300">
-              <i class="fas fa-hand-holding-heart text-2xl text-rose-600"></i>
-            </div>
-            <span class="w-12 h-px bg-amber-400"></span>
-          </div>
-
-          <div class="text-4xl sm:text-6xl font-cursive font-bold text-rose-600 drop-shadow-sm">
-            Vinitha
-          </div>
-        </div>
-
-        <!-- Bride's Parents Information -->
-        <div class="bg-amber-50/70 rounded-2xl p-4 border border-amber-200/60 my-4 max-w-xl mx-auto">
-          <p class="text-lg sm:text-xl font-serifTitle font-bold text-stone-800">
-            Smt. M. Rajani <span class="text-rose-600 font-normal">&</span> Sri. M. Madhusudhan
-          </p>
-          <p class="text-sm sm:text-base font-serifTitle text-stone-600 mt-1">
-            <i class="fas fa-location-dot text-amber-600 mr-1"></i> Tandur, Vikarabad Dist.
-          </p>
-        </div>
-
-        <!-- Date & Time Highlights -->
-        <div class="mt-6 flex flex-wrap justify-center gap-4 text-stone-800">
-          <div class="flex items-center gap-2 bg-rose-50 px-4 py-2 rounded-xl border border-rose-200">
-            <i class="far fa-calendar-alt text-rose-600 text-lg"></i>
-            <span class="font-serifTitle font-bold text-sm sm:text-base">Sunday, 29th November, 2026</span>
-          </div>
-          <div class="flex items-center gap-2 bg-amber-50 px-4 py-2 rounded-xl border border-amber-200">
-            <i class="far fa-clock text-amber-700 text-lg"></i>
-            <span class="font-serifTitle font-bold text-sm sm:text-base">11:00 AM Onwards</span>
-          </div>
-        </div>
-
-      </div>
-    </header>
-
-
-    <!-- ============================================== -->
-    <!-- 3. LIVE COUNTDOWN TIMER                        -->
-    <!-- ============================================== -->
-    <section class="max-w-4xl mx-auto px-4 mb-16 text-center">
-      <div class="bg-gradient-to-r from-amber-700 via-rose-700 to-amber-800 text-white p-6 sm:p-8 rounded-3xl shadow-xl">
-        <h3 class="text-xs sm:text-sm font-serifTitle uppercase tracking-widest text-amber-200 mb-2">Counting Down To The Celebration</h3>
-        <p class="text-2xl sm:text-3xl font-cursive mb-6">Until We Celebrate With You</p>
-
-        <div class="grid grid-cols-4 gap-2 sm:gap-4 max-w-md mx-auto text-stone-900">
-          <div class="bg-white/95 rounded-2xl p-2 sm:p-3 shadow">
-            <span id="days" class="block text-2xl sm:text-4xl font-bold font-serifTitle text-rose-700">00</span>
-            <span class="text-[10px] sm:text-xs font-serifTitle tracking-wider uppercase text-stone-500">Days</span>
-          </div>
-          <div class="bg-white/95 rounded-2xl p-2 sm:p-3 shadow">
-            <span id="hours" class="block text-2xl sm:text-4xl font-bold font-serifTitle text-rose-700">00</span>
-            <span class="text-[10px] sm:text-xs font-serifTitle tracking-wider uppercase text-stone-500">Hours</span>
-          </div>
-          <div class="bg-white/95 rounded-2xl p-2 sm:p-3 shadow">
-            <span id="minutes" class="block text-2xl sm:text-4xl font-bold font-serifTitle text-rose-700">00</span>
-            <span class="text-[10px] sm:text-xs font-serifTitle tracking-wider uppercase text-stone-500">Mins</span>
-          </div>
-          <div class="bg-white/95 rounded-2xl p-2 sm:p-3 shadow">
-            <span id="seconds" class="block text-2xl sm:text-4xl font-bold font-serifTitle text-rose-700">00</span>
-            <span class="text-[10px] sm:text-xs font-serifTitle tracking-wider uppercase text-stone-500">Secs</span>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================================== -->
-    <!-- 4. SCHEDULE OF EVENTS                          -->
-    <!-- ============================================== -->
-    <section class="max-w-4xl mx-auto px-4 mb-16">
-      <div class="text-center mb-8">
-        <span class="text-amber-700 font-serifTitle uppercase tracking-widest text-xs font-bold">Auspicious Program</span>
-        <h2 class="text-3xl sm:text-4xl font-serifTitle font-bold text-stone-800">Event Timeline</h2>
-        <div class="w-16 h-1 bg-amber-500 mx-auto mt-2 rounded-full"></div>
-      </div>
-
-      <div class="grid sm:grid-cols-2 gap-6">
-        <!-- Event 1: Reception -->
-        <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-rose-600 flex items-start space-x-4">
-          <div class="bg-rose-100 p-4 rounded-2xl text-rose-700 text-2xl shrink-0">
-            <i class="fas fa-glass-cheers"></i>
-          </div>
-          <div>
-            <span class="text-xs font-serifTitle tracking-wider uppercase px-2 py-0.5 bg-rose-50 text-rose-700 rounded-full font-bold">11:00 AM Onwards</span>
-            <h4 class="text-xl font-serifTitle font-bold text-stone-800 mt-2">Grand Reception</h4>
-            <p class="text-stone-600 text-sm mt-1">Join us on stage to shower your warm blessings, good wishes, and felicitations upon the newly wedded couple.</p>
-          </div>
-        </div>
-
-        <!-- Event 2: Lunch (Explicitly requested for 1:00 PM) -->
-        <div class="bg-white rounded-2xl p-6 shadow-md border-t-4 border-amber-600 flex items-start space-x-4">
-          <div class="bg-amber-100 p-4 rounded-2xl text-amber-700 text-2xl shrink-0">
-            <i class="fas fa-utensils"></i>
-          </div>
-          <div>
-            <span class="text-xs font-serifTitle tracking-wider uppercase px-2 py-0.5 bg-amber-50 text-amber-700 rounded-full font-bold">1:00 PM</span>
-            <h4 class="text-xl font-serifTitle font-bold text-stone-800 mt-2">Delicious Traditional Lunch</h4>
-            <p class="text-stone-600 text-sm mt-1">Please join us to partake in a sumptuous celebratory feast prepared with warmth and love for our honorable guests.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-
-    <!-- ============================================== -->
-    <!-- 5. PHOTO GALLERY (GOOGLE DRIVE READY)          -->
-    <!-- ============================================== -->
-    <section class="max-w-5xl mx-auto px-4 mb-16">
-      <div class="text-center mb-8">
-        <span class="text-amber-700 font-serifTitle uppercase tracking-widest text-xs font-bold">Treasured Memories</span>
-        <h2 class="text-3xl sm:text-4xl font-serifTitle font-bold text-stone-800">Moments & Memories</h2>
-        <p class="text-stone-500 text-sm mt-1">Glimpses of love and celebration</p>
-        <div class="w-16 h-1 bg-amber-500 mx-auto mt-2 rounded-full"></div>
-      </div>
-
-      <!-- 
-        NOTE FOR USER: 
-        To use your photos directly from Google Drive:
-        1. Set the Drive file sharing to "Anyone with the link can view".
-        2. Copy your File ID (from the share link: drive.google.com/file/d/FILE_ID/view).
-        3. Replace the `src` attribute with: https://drive.google.com/thumbnail?id=FILE_ID&sz=w1000
-        Default sample placeholders with fallback handling are set below.
-      -->
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+        <div class="sub-head">Voleti Family's Reception Invitation</div>
         
-        <!-- Photo 1 -->
-        <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer bg-amber-50 border border-amber-200 aspect-[4/5] transform transition duration-300 hover:-translate-y-1" onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1583939003579-730e3918a45a?auto=format&fit=crop&w=800&q=80" 
-               alt="Couple Portrait 1" 
-               class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-               onerror="this.src='https://placehold.co/800x1000/FFE4E6/881337?text=Udayeshwar+%26+Vinitha';" />
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-            <span class="text-white text-sm font-serifTitle">Blessed Together</span>
+        <div class="hosts-info">Smt. Voleti Supriya & Sri. Voleti Sivananda</div>
+        <div class="hosts-address">Udayraj Gifts, Sivanagar, Dharmavaram - 515671</div>
+
+        <p class="invitation-quote">
+          Together with their Families and with great joy & delight, we warmly invite you to share our happiness and grace the wedding reception of
+        </p>
+
+        <!-- COUPLE NAMES -->
+        <div class="couple-container">
+          <div class="groom-name">Udayeshwar</div>
+          <div class="couple-divider">
+            <span class="divider-line"></span>
+            <i class="fa-solid fa-hands-holding-child"></i>
+            <span class="divider-line"></span>
           </div>
+          <div class="bride-name">Vinitha</div>
         </div>
 
-        <!-- Photo 2 -->
-        <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer bg-amber-50 border border-amber-200 aspect-[4/5] transform transition duration-300 hover:-translate-y-1" onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=800&q=80" 
-               alt="Ceremony Details" 
-               class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-               onerror="this.src='https://placehold.co/800x1000/FEF3C7/78350F?text=Celebrations';" />
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-            <span class="text-white text-sm font-serifTitle">Cherished Moments</span>
-          </div>
+        <div class="bride-parents">
+          D/o <strong>Smt. M. Rajani & Sri. M. Madhusudhan</strong>
         </div>
+        <div class="bride-city">Tandur, Vikarabad Dist.</div>
 
-        <!-- Photo 3 -->
-        <div class="group relative overflow-hidden rounded-2xl shadow-lg cursor-pointer bg-amber-50 border border-amber-200 aspect-[4/5] transform transition duration-300 hover:-translate-y-1" onclick="openLightbox(this)">
-          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?auto=format&fit=crop&w=800&q=80" 
-               alt="Auspicious Rituals" 
-               class="w-full h-full object-cover group-hover:scale-105 transition duration-500" 
-               onerror="this.src='https://placehold.co/800x1000/FFE4E6/881337?text=Eternal+Bond';" />
-          <div class="absolute inset-0 bg-gradient-to-t from-stone-950/70 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition duration-300 flex items-end p-4">
-            <span class="text-white text-sm font-serifTitle">Joy & Traditions</span>
-          </div>
+        <!-- RECEPTION SCHEDULE BADGE -->
+        <div>
+          <span class="event-badge">RECEPTION</span>
         </div>
-
-      </div>
-
-      <!-- Quick helper notice for attaching drive photos -->
-      <div class="mt-4 p-4 rounded-xl bg-amber-50/70 border border-dashed border-amber-300 text-stone-600 text-xs text-center">
-        <i class="fab fa-google-drive text-amber-700 mr-1"></i>
-        <span><strong>Easy Photo Replacement:</strong> Open <code>index.html</code> in any editor and replace the image URLs with your Google Drive direct thumbnail links.</span>
-      </div>
-    </section>
-
-
-    <!-- ============================================== -->
-    <!-- 6. VENUE & LOCATION DIRECTIONS                 -->
-    <!-- ============================================== -->
-    <section class="max-w-4xl mx-auto px-4 mb-16">
-      <div class="bg-white rounded-3xl shadow-xl overflow-hidden border border-amber-200">
-        <div class="bg-gradient-to-r from-amber-600 to-rose-700 p-6 text-white text-center">
-          <span class="text-xs uppercase tracking-widest font-serifTitle text-amber-200 font-semibold">Location & Map</span>
-          <h2 class="text-2xl sm:text-3xl font-serifTitle font-bold mt-1">Reception Venue</h2>
-        </div>
-
-        <div class="p-6 sm:p-10 text-center">
-          <div class="w-16 h-16 bg-rose-50 rounded-full flex items-center justify-center mx-auto text-rose-600 text-2xl mb-4 border border-rose-200">
-            <i class="fas fa-map-marked-alt"></i>
-          </div>
-
-          <h3 class="text-2xl sm:text-3xl font-serifTitle font-bold text-stone-900 mb-1">
-            Pola Convention Hall
-          </h3>
-          <p class="text-base sm:text-lg text-stone-600 font-serifTitle">
-            Bathalapalli Road, Dharmavaram, Andhra Pradesh - 515671
-          </p>
-
-          <div class="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4">
-            <!-- Google Maps Button -->
-            <a href="https://maps.google.com/?q=Pola+Convention+Hall+Bathalapalli+Road+Dharmavaram" 
-               target="_blank" 
-               rel="noopener noreferrer"
-               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-emerald-600 to-teal-700 hover:from-emerald-700 hover:to-teal-800 text-white font-serifTitle px-6 py-3.5 rounded-full shadow-lg transition transform hover:-translate-y-0.5">
-              <i class="fas fa-location-arrow"></i>
-              <span>Get Driving Directions</span>
-            </a>
-
-            <!-- Save To Calendar Button -->
-            <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Reception+of+Udayeshwar+and+Vinitha&dates=20261129T053000Z/20261129T093000Z&details=Reception+Invitation+by+Voleti+Family+at+Pola+Convention+Hall,+Dharmavaram.+Lunch+at+1:00+PM.&location=Pola+Convention+Hall,+Bathalapalli+Road,+Dharmavaram" 
-               target="_blank"
-               rel="noopener noreferrer"
-               class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-gradient-to-r from-amber-600 to-rose-600 hover:from-amber-700 hover:to-rose-700 text-white font-serifTitle px-6 py-3.5 rounded-full shadow-lg transition transform hover:-translate-y-0.5">
-              <i class="far fa-calendar-plus"></i>
-              <span>Add to Google Calendar</span>
-            </a>
-          </div>
+        <div class="event-main-time">
+          Sunday, 29th November 2026<br />
+          <span style="font-size: 1.15rem; color: var(--primary); font-weight: 700;">11:00 AM Onwards</span>
         </div>
       </div>
     </section>
 
-
-    <!-- ============================================== -->
-    <!-- 7. SPECIAL INVITEE & COMPLIMENTS FOOTER        -->
-    <!-- ============================================== -->
-    <footer class="max-w-3xl mx-auto px-4 text-center">
-      
-      <!-- Special Invitee Capsule Badge -->
-      <div class="inline-block bg-white border-2 border-rose-300 shadow-md rounded-full px-6 py-2.5 mb-6">
-        <span class="text-stone-500 font-serifTitle text-xs uppercase tracking-wider">Special Invitee : </span>
-        <span class="text-rose-700 font-serifTitle font-bold text-sm sm:text-base">Rajesh Voleti</span>
+    <!-- ====================================================
+         COUNTDOWN TIMER
+    ==================================================== -->
+    <section class="countdown-section">
+      <div class="timer-grid">
+        <div class="timer-box">
+          <div class="num" id="days">00</div>
+          <div class="label">Days</div>
+        </div>
+        <div class="timer-box">
+          <div class="num" id="hours">00</div>
+          <div class="label">Hours</div>
+        </div>
+        <div class="timer-box">
+          <div class="num" id="minutes">00</div>
+          <div class="label">Minutes</div>
+        </div>
+        <div class="timer-box">
+          <div class="num" id="seconds">00</div>
+          <div class="label">Seconds</div>
+        </div>
       </div>
+    </section>
 
-      <div class="text-stone-700 text-lg sm:text-xl font-cursive font-bold mb-2">
-        With the best compliments from :
+    <!-- ====================================================
+         COUPLE VIDEO SECTION (Replaced Moments & Memories)
+    ==================================================== -->
+    <section class="video-section">
+      <h2 class="section-title">A Beautiful Celebration</h2>
+      <p class="section-subtitle">A glimpse of our happiness, love, and togetherness</p>
+
+      <div class="video-card">
+        <div class="video-wrapper">
+          <!-- The couple's video file in the repository -->
+          <video id="coupleVideo" playsinline controls loop preload="metadata" poster="">
+            <source src="couple-video.mp4" type="video/mp4" />
+            Your browser does not support HTML5 video.
+          </video>
+        </div>
+        <div class="video-caption">
+          <h4>Udayeshwar & Vinitha</h4>
+          <p>Two hearts beginning their journey of a lifetime</p>
+        </div>
       </div>
-      <p class="text-2xl sm:text-3xl font-serifTitle text-amber-800 font-semibold tracking-wide">
-        Near & Dear
-      </p>
+    </section>
 
-      <div class="mt-12 text-stone-400 text-xs font-serifTitle tracking-widest uppercase">
-        Bless the Couple with your Presence • 29 November 2026
+    <!-- ====================================================
+         EVENT ITINERARY (INCLUDING LUNCH AT 1:00 PM)
+    ==================================================== -->
+    <section class="schedule-section">
+      <h2 class="section-title">Celebration Schedule</h2>
+      <p class="section-subtitle">Sunday, 29th November 2026</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-users"></i>
+          </div>
+          <div class="timeline-info">
+            <h4>Guest Arrival & Reception</h4>
+            <span>11:00 AM Onwards</span>
+          </div>
+        </div>
+
+        <div class="timeline-item">
+          <div class="timeline-icon">
+            <i class="fa-solid fa-utensils"></i>
+          </div>
+          <div class="timeline-info">
+            <h4>Festive Lunch</h4>
+            <span>1:00 PM</span>
+          </div>
+        </div>
       </div>
-    </footer>
+    </section>
 
+    <!-- ====================================================
+         VENUE & DIRECTIONS
+    ==================================================== -->
+    <section class="venue-section">
+      <div class="venue-card">
+        <h2 class="section-title" style="margin-bottom: 12px;">Reception Venue</h2>
+        <div class="venue-name">Pola Convention Hall</div>
+        <p class="venue-address">
+          Bathalapalli Road, Dharmavaram, Andhra Pradesh - 515671
+        </p>
+
+        <a href="https://www.google.com/maps/search/?api=1&query=Pola+Convention+Hall+Bathalapalli+Road+Dharmavaram" target="_blank" rel="noopener noreferrer" class="btn-directions">
+          <i class="fa-solid fa-location-dot"></i> Get Directions on Google Maps
+        </a>
+
+        <div>
+          <div class="special-invitee-badge">
+            Special Invitee: <strong>Rajesh Voleti</strong>
+          </div>
+        </div>
+
+        <div class="footer-warmth">
+          With best compliments from : Near & Dear
+        </div>
+      </div>
+    </section>
   </main>
 
-
-  <!-- ============================================== -->
-  <!-- LIGHTBOX MODAL FOR FULL-SIZE PHOTOS            -->
-  <!-- ============================================== -->
-  <div id="lightboxModal" class="fixed inset-0 z-50 hidden bg-black/90 items-center justify-center p-4">
-    <button onclick="closeLightbox()" class="absolute top-5 right-5 text-white hover:text-amber-400 text-3xl focus:outline-none">
-      <i class="fas fa-times"></i>
-    </button>
-    <img id="lightboxImg" src="" alt="Enlarged photo" class="max-h-[85vh] max-w-[90vw] object-contain rounded-xl shadow-2xl border-2 border-amber-300/40" />
-  </div>
-
-
-  <!-- ============================================== -->
-  <!-- JAVASCRIPT: LOGIC, AUDIO SYNTH, ANIMATION     -->
-  <!-- ============================================== -->
+  <!-- ====================================================
+       SCRIPTS: YOUTUBE AUDIO, VIDEO & COUNTDOWN
+  ==================================================== -->
   <script>
-    // --- 1. Rose Petals Effect ---
-    function initPetals() {
-      const container = document.getElementById('petal-container');
-      const petalChars = ['🌸', '🌺', '✨', '💐', '🌼'];
-      const count = 18;
+    // 1. YouTube Iframe API for "Shatamanam Bhavati" (jjNdc_Cyzdg)
+    let ytPlayer;
+    let isMusicPlaying = false;
 
-      for (let i = 0; i < count; i++) {
-        const span = document.createElement('span');
-        span.className = 'petal text-lg sm:text-xl';
-        span.textContent = petalChars[Math.floor(Math.random() * petalChars.length)];
-        span.style.left = Math.random() * 100 + 'vw';
-        span.style.animationDuration = (6 + Math.random() * 7) + 's';
-        span.style.animationDelay = (Math.random() * 5) + 's';
-        span.style.opacity = Math.random() * 0.7 + 0.3;
-        container.appendChild(span);
-      }
-    }
+    // Load the IFrame Player API code asynchronously
+    const tag = document.createElement('script');
+    tag.src = "https://www.youtube.com/iframe_api";
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-    // --- 2. Synthetic Indian Raga Ambient Audio (No External MP3 Dependency) ---
-    // Uses the Web Audio API to produce a serene sitar/tanpura harmonic drone in C-Sharp
-    let audioCtx = null;
-    let isPlaying = false;
-    let droneOsc1, droneOsc2, droneGain;
-
-    function initAudio() {
-      try {
-        const AudioContext = window.AudioContext || window.webkitAudioContext;
-        audioCtx = new AudioContext();
-        
-        droneGain = audioCtx.createGain();
-        droneGain.gain.setValueAtTime(0.001, audioCtx.currentTime);
-        droneGain.connect(audioCtx.destination);
-
-        // Tanpura Root Note (C# ~ 138.59 Hz)
-        droneOsc1 = audioCtx.createOscillator();
-        droneOsc1.type = 'sine';
-        droneOsc1.frequency.setValueAtTime(138.59, audioCtx.currentTime);
-
-        // Tanpura Fifth Note (G# ~ 207.65 Hz)
-        droneOsc2 = audioCtx.createOscillator();
-        droneOsc2.type = 'triangle';
-        droneOsc2.frequency.setValueAtTime(207.65, audioCtx.currentTime);
-
-        droneOsc1.connect(droneGain);
-        droneOsc2.connect(droneGain);
-
-        droneOsc1.start();
-        droneOsc2.start();
-      } catch (e) {
-        console.warn("Web Audio not supported:", e);
-      }
-    }
-
-    function toggleMusic() {
-      if (!audioCtx) initAudio();
-      
-      const icon = document.getElementById('musicIcon');
-      const text = document.getElementById('musicText');
-
-      if (!isPlaying) {
-        if (audioCtx.state === 'suspended') {
-          audioCtx.resume();
+    function onYouTubeIframeAPIReady() {
+      ytPlayer = new YT.Player('yt-audio-player', {
+        height: '100',
+        width: '100',
+        videoId: 'jjNdc_Cyzdg', // Shatamanam Bhavati Title Song
+        playerVars: {
+          'autoplay': 0,
+          'controls': 0,
+          'loop': 1,
+          'playlist': 'jjNdc_Cyzdg',
+          'playsinline': 1
+        },
+        events: {
+          'onReady': onPlayerReady
         }
-        droneGain.gain.setTargetAtTime(0.12, audioCtx.currentTime, 0.5);
-        isPlaying = true;
-        text.innerText = 'Music: On';
-        icon.className = 'fas fa-volume-up text-amber-200';
-      } else {
-        droneGain.gain.setTargetAtTime(0.0001, audioCtx.currentTime, 0.3);
-        isPlaying = false;
-        text.innerText = 'Music: Off';
-        icon.className = 'fas fa-volume-mute';
-      }
+      });
     }
 
-    document.getElementById('musicToggleBtn').addEventListener('click', toggleMusic);
+    function onPlayerReady(event) {
+      // Player ready
+    }
 
-    // --- 3. Opening Wax Seal Envelope Action ---
-    const openBtn = document.getElementById('openInvitationBtn');
-    const openingScreen = document.getElementById('openingScreen');
-    const mainWebsite = document.getElementById('mainWebsite');
+    const musicBtn = document.getElementById('musicToggleBtn');
+    function toggleMusic() {
+      if (!ytPlayer || typeof ytPlayer.playVideo !== 'function') return;
+
+      if (isMusicPlaying) {
+        ytPlayer.pauseVideo();
+        musicBtn.classList.remove('playing');
+        musicBtn.innerHTML = '<i class="fa-solid fa-volume-xmark"></i>';
+        isMusicPlaying = false;
+      } else {
+        ytPlayer.playVideo();
+        musicBtn.classList.add('playing');
+        musicBtn.innerHTML = '<i class="fa-solid fa-music"></i>';
+        isMusicPlaying = true;
+      }
+    }
+    musicBtn.addEventListener('click', toggleMusic);
+
+    // 2. Open Envelope Animation & Auto-start Music
+    const openBtn = document.getElementById('openEnvelopeBtn');
+    const overlay = document.getElementById('invitation-envelope-overlay');
 
     openBtn.addEventListener('click', () => {
-      // Start relaxing auspicious tones
-      toggleMusic();
+      overlay.classList.add('opened');
+      
+      // Start Shatamanam Bhavati song on click
+      if (ytPlayer && typeof ytPlayer.playVideo === 'function') {
+        ytPlayer.playVideo();
+        isMusicPlaying = true;
+        musicBtn.classList.add('playing');
+      }
 
-      // Fade out opening envelope
-      openingScreen.classList.add('opacity-0');
-      setTimeout(() => {
-        openingScreen.style.display = 'none';
-        // Reveal main invitation content with smooth transition
-        mainWebsite.classList.remove('opacity-0');
-        mainWebsite.classList.add('opacity-100');
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-      }, 700);
+      // Auto-play the video mutely
+      const coupleVideo = document.getElementById('coupleVideo');
+      if (coupleVideo) {
+        coupleVideo.play().catch(() => {
+          // Fallback if browser requires manual gesture
+        });
+      }
     });
 
-    // --- 4. Wedding Reception Countdown Timer ---
-    // Event: 29th November 2026, 11:00 AM IST
-    const receptionDate = new Date('November 29, 2026 11:00:00 GMT+05:30').getTime();
+    // 3. Reception Countdown (29 November 2026, 11:00 AM IST)
+    const targetDate = new Date("2026-11-29T11:00:00+05:30").getTime();
 
     function updateCountdown() {
       const now = new Date().getTime();
-      const difference = receptionDate - now;
+      const difference = targetDate - now;
 
       if (difference <= 0) {
         document.getElementById('days').innerText = "00";
@@ -589,42 +861,19 @@
         return;
       }
 
-      const d = Math.floor(difference / (1000 * 60 * 60 * 24));
-      const h = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const m = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-      const s = Math.floor((difference % (1000 * 60)) / 1000);
+      const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-      document.getElementById('days').innerText = String(d).padStart(2, '0');
-      document.getElementById('hours').innerText = String(h).padStart(2, '0');
-      document.getElementById('minutes').innerText = String(m).padStart(2, '0');
-      document.getElementById('seconds').innerText = String(s).padStart(2, '0');
+      document.getElementById('days').innerText = String(days).padStart(2, '0');
+      document.getElementById('hours').innerText = String(hours).padStart(2, '0');
+      document.getElementById('minutes').innerText = String(minutes).padStart(2, '0');
+      document.getElementById('seconds').innerText = String(seconds).padStart(2, '0');
     }
 
     setInterval(updateCountdown, 1000);
     updateCountdown();
-
-    // --- 5. Lightbox Modal Gallery ---
-    const lightboxModal = document.getElementById('lightboxModal');
-    const lightboxImg = document.getElementById('lightboxImg');
-
-    function openLightbox(element) {
-      const img = element.querySelector('img');
-      lightboxImg.src = img.src;
-      lightboxModal.classList.add('lightbox-active');
-    }
-
-    function closeLightbox() {
-      lightboxModal.classList.remove('lightbox-active');
-    }
-
-    lightboxModal.addEventListener('click', (e) => {
-      if (e.target === lightboxModal) closeLightbox();
-    });
-
-    // Initialize petals on load
-    window.onload = function() {
-      initPetals();
-    };
   </script>
 </body>
 </html>
